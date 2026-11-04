@@ -5,6 +5,8 @@ const { createRequire } = require('module');
 const { chromium } = createRequire('E:/Портфолио/omega-hakaton/e2e/')('@playwright/test');
 
 const BASE = process.argv[2] || 'http://127.0.0.1:5600/ai-assistants-demo/';
+// на чужом адресе (например, GitHub Pages) только проверяем, картинки в docs/ не трогаем
+const OUT = process.argv[2] ? require('os').tmpdir() : path.join(__dirname, '..', 'docs');
 // Вопрос → ожидаемый источник ответа (null — ассистент должен предложить менеджера)
 const DIALOGS = {
     dental: [['Почём у вас почистить зубы?', 'Профессиональная чистка'], ['А пломбу ставить больно?', 'Лечение кариеса и пломбы'], ['Удаляете зубы мудрости?', null]],
@@ -36,7 +38,7 @@ const DIALOGS = {
             }
         }
         await page.waitForTimeout(400); // дождаться анимации появления
-        await page.locator('.layout').screenshot({ path: path.join(__dirname, '..', 'docs', `${name}.png`) });
+        await page.locator('.layout').screenshot({ path: path.join(OUT, `${name}.png`) });
         await page.close();
     }
     // телефон: без горизонтального скролла, кнопка менеджера работает
@@ -48,7 +50,7 @@ const DIALOGS = {
     await phone.click('text=Не то? Позвать менеджера');
     await phone.waitForSelector('text=Передал вопрос менеджеру');
     await phone.waitForTimeout(400);
-    await phone.locator('.chat').screenshot({ path: path.join(__dirname, '..', 'docs', 'phone.png') });
+    await phone.locator('.chat').screenshot({ path: path.join(OUT, 'phone.png') });
     await browser.close();
     assert.deepEqual(errors, []);
     console.log('ok: интерфейс и диалоги всех 4 ассистентов');
