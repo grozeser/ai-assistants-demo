@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ассистенты по базе знаний — демо</title>
+    <meta name="description" content="Онлайн-ассистенты, которые отвечают клиентам и сотрудникам по базе знаний компании и честно зовут менеджера, если ответа нет.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="top">
+    <div class="wrap">
+        <p class="eyebrow">Демо · работает прямо в браузере</p>
+        <h1>Ассистент, который отвечает по&nbsp;вашей базе знаний</h1>
+        <p class="lead">Задайте вопрос своими словами. Ассистент найдёт нужную статью, ответит её текстом и покажет источник. Если ответа в базе нет — не выдумывает, а предлагает менеджера.</p>
+    </div>
+</header>
+
+<main class="wrap">
+    <nav class="tabs" role="tablist" aria-label="Компании" id="tabs"></nav>
+    <div class="layout">
+        <section class="chat" aria-label="Чат с ассистентом">
+            <div class="chat__head">
+                <span class="ava" id="ava" aria-hidden="true"></span>
+                <span><b id="botName"></b><small id="botRole"></small></span>
+                <span class="online">онлайн</span>
+            </div>
+            <div class="chat__log" id="log" aria-live="polite"></div>
+            <div class="chat__chips" id="chips"></div>
+            <form class="chat__form" id="form">
+                <label class="sr" for="input">Ваш вопрос</label>
+                <input id="input" autocomplete="off" placeholder="Напишите вопрос…">
+                <button type="submit" aria-label="Отправить"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+            </form>
+        </section>
+        <aside class="kb" aria-label="База знаний">
+            <h2>База знаний</h2>
+            <p class="muted" id="kbInfo"></p>
+            <ol id="kbList"></ol>
+            <p class="kb__note">Подсвечена статья, из которой взят последний ответ.</p>
+        </aside>
+    </div>
+</main>
+
+<footer class="foot wrap">Компании и данные вымышленные. Заявки менеджеру в демо никуда не отправляются.</footer>
+
+<script src="assistant.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
